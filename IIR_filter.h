@@ -15,15 +15,15 @@ operator: (float)   // calls "eval"
 class IIR_filter
 {
 public:
-    IIR_filter(float,float);
+    IIR_filter(float tau,float ts);
     IIR_filter(float,float,float);
+    IIR_filter(float k, float wb, float D, float Ts);
     virtual ~IIR_filter();
     float eval(float);
     float operator()(float u){
             return eval((float)u);
          }
 private:
-    float *B;
-    float *A;
-    uint8_t nb,na;
+    float a0, a1, a2, b0, k;
+    float y_m1 = 0, y_m2;
 };
